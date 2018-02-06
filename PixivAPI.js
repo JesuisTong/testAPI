@@ -1,4 +1,3 @@
-const request = require('request');
 const PixivBase = require('./PixivBase');
 
 class PixivAPI extends PixivBase {
