@@ -50,7 +50,8 @@ class PixivBase {
         return;
       }
       const { response } = JSON.parse(res);
-      this.accessToken = response.access_token;
+      this.setAccessToken(response.access_token);
+      // this.accessToken = response.access_token;
       this.refreshToken = response.refresh_token;
       this.authResponse = response;
       console.log('模拟登录授权成功!');
@@ -59,6 +60,13 @@ class PixivBase {
       throw new Error(err.message);
     });
   };
+  
+  setAccessToken = (access_token) => {
+    this.accessToken = access_token;
+    if (this.headers) {
+      this.headers.Authorization = `Bearer ${access_token}`;
+    }
+  }
 
   // 羊肉串
   fetch = async (uri, options = {}, cb = console.log) => {
