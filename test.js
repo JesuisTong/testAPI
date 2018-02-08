@@ -26,7 +26,6 @@ router.get('/test', async (ctx, next) => {
 // 模拟登录
 router.get('/login', async (ctx, next) => {
   console.log('-----login----');
-  console.log(ctx._matchedRoute);
   console.log(ctx.query);
   const { response, request } = ctx;
   let query = { ...ctx.query };
@@ -42,13 +41,15 @@ router.get('/login', async (ctx, next) => {
         if (res.has_error) {
           throw new Error(res);
         }
+        console.log(res);
         response.type = 'application/json';
+        // text/html; charset=UTF-8
         response.body = {
           code: 0,
           msg: '登陆成功！'
         }
       }
-    );  
+    );
   } catch (err) {
     ctx.status = err.statusCode || err.status || 500;
     ctx.body = {
@@ -71,7 +72,6 @@ router.get('/rank/:mode', async (ctx, next) => {
   query = { mode: ctx.params.mode, ...query };
   try {
     await Pixiv.illustRanking(query, (res) => {
-      console.log(res);
       response.type = 'application/json';      
       response.body = res;
     });
