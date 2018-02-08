@@ -61,6 +61,7 @@ class PixivBase {
     });
   };
   
+  // 设置accessToken 并且更新headers
   setAccessToken = (access_token) => {
     this.accessToken = access_token;
     if (this.headers) {

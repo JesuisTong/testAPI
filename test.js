@@ -42,8 +42,9 @@ router.get('/login', async (ctx, next) => {
           throw new Error(res);
         }
         console.log(res);
-        response.type = 'application/json';
         // text/html; charset=UTF-8
+        response.type = 'application/json';
+        response['Content-Encoding'] = 'gzip';
         response.body = {
           code: 0,
           msg: '登陆成功！'
