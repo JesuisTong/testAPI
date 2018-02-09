@@ -7,6 +7,14 @@ const App = new Koa();
 const router = new Router();
 const Pixiv = new PixivAPI();
 
+router.get('/', async (ctx) => {
+  console.log('-----empty----');
+  const {request, response} = ctx;
+  if ((request.method === 'GET' || request.method === 'HEAD') && request.accepts('html')) {
+    ctx.type = 'html';
+    ctx.body = fs.createReadStream('./test.html');
+  }
+});
 
 // 你哈哈测试
 router.get('/test', async (ctx, next) => {
