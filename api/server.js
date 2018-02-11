@@ -1,16 +1,15 @@
 const fs = require('fs');
 const Koa = require('koa');
 const Router = require('koa-router');
-const PixivAPI = require('./build/PixivAPI');
+const PixivAPI = require('../build/PixivAPI');
 
 const App = new Koa();
 const router = new Router();
 const Pixiv = new PixivAPI();
 
-// 你哈哈测试
-router.get('/test', async (ctx, next) => {
+// 测试是否正常
+router.get('/api/test', async (ctx, next) => {
   console.log('-----test----');
-  console.log(ctx._matchedRoute);
   console.log(ctx.query);
   const { response } = ctx;
   response.lastModified = new Date();
@@ -20,10 +19,10 @@ router.get('/test', async (ctx, next) => {
   };
   const body = await readFile();
   response.body = JSON.parse(body);
-})
+});
 
 // 模拟登录
-router.get('/login', async (ctx, next) => {
+router.get('/api/login', async (ctx, next) => {
   console.log('-----login----');
   console.log(ctx.query);
   const { response, request } = ctx;
@@ -53,16 +52,15 @@ router.get('/login', async (ctx, next) => {
   } catch (err) {
     ctx.status = err.statusCode || err.status || 500;
     ctx.body = {
-      code: '401',
+      code: 400,
       msg: err.message
     };
   }
 });
 
-// get图片de🌟ze
-router.get('/rank/:mode', async (ctx, next) => {
+// get每日图片de🌟ze
+router.get('/api/rank/:mode', async (ctx, next) => {
   console.log('----ranking select----');
-  console.log(ctx._matchedRoute);
   console.log(ctx.query);
   const { response, request } = ctx;
   let query = { ...ctx.query };
@@ -78,18 +76,21 @@ router.get('/rank/:mode', async (ctx, next) => {
   } catch (err) {
     ctx.status = err.statusCode || err.status || 500;
     ctx.body = {
-      code: 'error',
+      code: 400,
       msg: err.message
     };
   }
 });
 
-router.get('/*', async (ctx) => {
+router.get('/api/*', async (ctx) => {
   console.log('-----empty----');
   const {request, response} = ctx;
   if ((request.method === 'GET' || request.method === 'HEAD') && request.accepts('html')) {
-    ctx.type = 'html';
-    ctx.body = fs.createReadStream('./test.html');
+    ctx.type = 'application/json';
+    ctx.body = {
+      code: 404,
+      msg: 'not found api'
+    };
   }
 });
 
