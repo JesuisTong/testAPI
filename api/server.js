@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const Koa = require('koa');
 const Router = require('koa-router');
 const PixivAPI = require('../build/PixivAPI');
@@ -104,7 +105,7 @@ router.get('/api/*', async (ctx) => {
 router.get('/index', async (ctx) => {
   const { response } = ctx;
   response.type = 'text/html';
-  response.body = fs.createReadStream('../Vuew/index.html');
+  response.body = fs.createReadStream(path.resolve('..', 'Vuew/index.html'));
 });
 
 
