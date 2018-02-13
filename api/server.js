@@ -28,6 +28,10 @@ router.get('/api/login', async (ctx, next) => {
   const { response, request } = ctx;
   let query = { ...ctx.query };
   if (Object.keys(query).length === 0) {
+    ctx.body = {
+      code: 101,
+      msg: 'please enter your userName or password.'
+    }
     throw new Error('please enter your userName or password.');
   }
   try {
@@ -97,3 +101,9 @@ router.get('/api/*', async (ctx) => {
 App.use(router.routes());
 
 App.listen(3001);
+
+// 模拟登录
+if (process.argv.length > 2) {
+  console.log(process.argv[2], process.argv[3]);
+  Pixiv.login(process.argv[2], process.argv[3]);
+}

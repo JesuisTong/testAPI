@@ -44,7 +44,7 @@ class PixivBase {
       },
       timeout: 10000
     }).then(res => {
-      cb(JSON.parse(res));
+      cb && cb(JSON.parse(res));
       if (res.has_error) {
         console.error(res.message || '账号或者密码错误');
         return;
@@ -56,7 +56,7 @@ class PixivBase {
       this.authResponse = response;
       console.log('模拟登录授权成功!');
     }).catch(err => {
-      cb(err);
+      cb && cb(err);
       throw new Error(err.message);
     });
   };
@@ -91,9 +91,9 @@ class PixivBase {
       },
       timeout: 10000
     }).then((res) => {
-      cb(res);
+      cb && cb(res);
     }).catch(err => {
-      cb(err);
+      cb && cb(err);
     });
   }
 }
