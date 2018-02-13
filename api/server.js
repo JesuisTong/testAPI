@@ -105,7 +105,7 @@ router.get('/api/*', async (ctx) => {
 router.get('/index', async (ctx) => {
   const { response } = ctx;
   response.type = 'text/html';
-  response.body = fs.createReadStream(path.resolve('..', 'Vuew/index.html'));
+  response.body = fs.createReadStream(path.resolve(__dirname, '../Vuew/index.html'));
 });
 
 
