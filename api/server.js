@@ -98,6 +98,16 @@ router.get('/api/*', async (ctx) => {
   }
 });
 
+
+
+// 页面处理
+router.get('/index', async (ctx) => {
+  const { response } = ctx;
+  response.type = 'text/html';
+  response.body = fs.createReadStream('../Vuew/dist/build.js');
+});
+
+
 App.use(router.routes());
 
 App.listen(3001);
