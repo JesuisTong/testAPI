@@ -13,8 +13,7 @@
     "koa": "^2.4.1",
     "koa-router": "^7.3.0",
     "koa-static": "^4.0.2",
-    "request-promise": "^4.2.2",
-    "vue": "^2.5.13"
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

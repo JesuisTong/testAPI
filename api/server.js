@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Koa = require('koa');
 const Router = require('koa-router');
+const serve = require('koa-static');
 const PixivAPI = require('../build/PixivAPI');
 
 const App = new Koa();
@@ -108,7 +109,9 @@ router.get('/index', async (ctx) => {
   response.body = fs.createReadStream(path.resolve(__dirname, '../Vuew/index.html'));
 });
 
-
+// 静态资源
+App.use(serve(path.resolve(__dirname, '../Vuew')));
+// 路由系统
 App.use(router.routes());
 
 App.listen(3001);

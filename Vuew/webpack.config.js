@@ -1,7 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 
-module.exports = {
+var config = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -16,12 +16,17 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ],
-      },      {
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
+          postcss: [require('autoprefixer')()],
           loaders: {
-          }
+            script: 'babel-loader',
+            style: 'sass-loader',
+          },
+          esModule: true,
           // other vue-loader options go here
         }
       },
@@ -40,9 +45,7 @@ module.exports = {
     ]
   },
   resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    },
+    alias: {},
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
@@ -58,9 +61,9 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
+  config.devtool = '#source-map';
+  config.plugins = (config.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -77,3 +80,6 @@ if (process.env.NODE_ENV === 'production') {
     })
   ])
 }
+
+
+module.exports = config;
