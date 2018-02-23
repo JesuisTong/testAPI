@@ -1,4 +1,5 @@
 build
 .vscode
+adda
 node_modules
 package-lock.json
