@@ -1,22 +1,17 @@
 var path = require('path')
 var webpack = require('webpack')
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 var config = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js'
+    filename: '[name].js',
+    chunkFilename: '[name].[chunkhash:5].js'
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ],
-      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -24,7 +19,7 @@ var config = {
           postcss: [require('autoprefixer')()],
           loaders: {
             script: 'babel-loader',
-            style: 'sass-loader',
+            scss: 'vue-style-loader!css-loader!sass-loader',
           },
           esModule: true,
           // other vue-loader options go here
@@ -45,36 +40,41 @@ var config = {
     ]
   },
   resolve: {
-    alias: {},
+    alias: {
+      'vue': 'vue/dist/vue.esm.js',
+    },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true,
-    host: '0.0.0.0'
-  },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "manifest",
+      minChunks: Infinity
+    })
+  ],
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: 'eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  config.devtool = '#source-map';
+  config.devtool = 'inline-source-map';
   config.plugins = (config.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
