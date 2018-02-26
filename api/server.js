@@ -103,7 +103,7 @@ router.get('/api/*', async (ctx) => {
 
 
 // 页面处理
-router.get('/index', async (ctx) => {
+router.get('/*', async (ctx) => {
   const { response } = ctx;
   response.type = 'text/html';
   response.body = fs.createReadStream(path.resolve(__dirname, '../Vuew/index.html'));
