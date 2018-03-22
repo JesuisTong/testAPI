@@ -111,6 +111,7 @@ router.get('/*', async (ctx) => {
 
 // 静态资源
 App.use(serve(path.resolve(__dirname, '../Vuew')));
+App.use(serve(path.resolve(__dirname, '../Vuew/src')));
 // 路由系统
 App.use(router.routes());
 
