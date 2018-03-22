@@ -2,7 +2,6 @@
   <div id='404-not-found'>
     Darling in the FranXX
     <p>Image for xx</p>
-    <!-- <p>{{ JSON.string$router }}</p> -->
     <img class='ima' src='../assets/015.jpg' alt='error'>
     <router-link to="/index">Index</router-link>
   </div>

@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
-
+import { Carousel, CarouselItem } from 'element-ui';
 
 Vue.use(VueRouter);
+Vue.component(Carousel.name, Carousel);
+Vue.component(CarouselItem.name, CarouselItem);
+
 
 const Index = () => import(/* webpackChunkName: "index" */ './View/App.vue');
 const NotFound = () => import(/* webpackChunkName: "notfound" */ './View/notFound.vue');
+
 
 const router = new VueRouter({
   mode: 'history',
