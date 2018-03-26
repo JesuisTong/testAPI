@@ -71,7 +71,6 @@ class PixivBase {
 
   // 羊肉串
   fetch = async (uri, options = {}, cb = console.log) => {
-    console.log(uri, options, cb);
     const { method = 'get', body = {}, headers = {} } = options;
     let url = uri;
     if (this._apiPrefix) {
@@ -82,6 +81,7 @@ class PixivBase {
         body[i] = body[i] ? 'true' : 'false';
       }
     });
+    console.log(uri, options, body);
     await request[method.toLowerCase()]({
       url,
       headers,
