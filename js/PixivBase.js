@@ -82,10 +82,12 @@ class PixivBase {
       }
     });
     console.log(uri, options, body);
-    await request[method.toLowerCase()]({
+    await request({
+      method: method.toUpperCase(),
       url,
       headers,
-      json: body,
+      body,
+      json: true,
       agentOptions: {
         rejectUnauthorized: false,
       },
