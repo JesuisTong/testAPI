@@ -17,7 +17,7 @@ export default {
 <style lang="scss" scoped>
 .item {
   width: 33%;
-  height: 25vh;
+  height: 33vh;
   background-color: #fff;
   .img {
     width: 100%;
@@ -32,11 +32,11 @@ export default {
     box-sizing: border-box;
     padding-top: 10%;
     color: red;
-    .artist {
-
-    }
-    .content {
-
+    .artist, .content {
+      width: 100%;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

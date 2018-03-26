@@ -78,8 +78,8 @@ class PixivBase {
       url = this._apiPrefix + uri;
     }
     Object.keys(body).forEach(i => {
-      if (typeof i === 'boolean') {
-        body[i] = i ? 'true' : 'false';
+      if (typeof body[i] === 'boolean') {
+        body[i] = body[i] ? 'true' : 'false';
       }
     });
     await request[method.toLowerCase()]({
