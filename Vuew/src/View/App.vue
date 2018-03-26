@@ -1,7 +1,7 @@
 <template>
   <div id="index">
-    <!-- <topHeader /> -->
-    <topNavigator v-bind="navList" />
+    <topHeader :navList="navList" />
+    <!-- <topNavigator v-bind="navList" /> -->
     <el-carousel height="500px">
       <el-carousel-item v-for="item in imgs" :key="item">
         <img class="carous" :src="item" alt="error" />
@@ -34,21 +34,95 @@ export default {
       imgs: ['../assets/Desktop/img1.jpg', '../assets/Desktop/img2.jpg'],
       navList: [
         {
-          text: '1',
-          url: '/xixi'
+          text: '运营管理',
+          url: '/manage',
+          children: [
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+          ]
         },
         {
-          text: '2',
-          url: '/gaga'
+          text: '产品中心',
+          url: '/production',
+          children: [
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+          ]
         },
         {
-          text: '3',
-          url: '/yoyo'
+          text: '企业动态',
+          url: '/nouvelle',
+          children: [
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+          ]
         },
         {
-          text: '4',
-          url: '/fnfn'
+          text: '人才招聘',
+          url: '/recruiter',
+          children: [
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+          ]
         },
+        {
+          text: '联系我们',
+          url: '/contact',
+          children: [
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+            {
+              text: '',
+              url: ''
+            },
+          ]
+        }
       ],
       msg: 'Welcome to Your Vue.js App'
     };
