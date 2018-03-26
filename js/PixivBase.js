@@ -86,7 +86,7 @@ class PixivBase {
       method: method.toUpperCase(),
       url,
       headers,
-      body,
+      qs: body,
       json: true,
       agentOptions: {
         rejectUnauthorized: false,
