@@ -33,6 +33,10 @@ var config = {
         loader: 'vue-style-loader!css-loader!sass-loader'
       },
       {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader',
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/

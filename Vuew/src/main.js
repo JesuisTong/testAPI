@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
-import { Carousel, CarouselItem, Dropdown, DropdownMenu, DropdownItem } from 'element-ui';
+import { Main, Aside, Container, Carousel, CarouselItem, Dropdown, DropdownMenu, DropdownItem } from 'element-ui';
+import './global/main.scss';
 
 Vue.use(VueRouter);
 Vue.component(Carousel.name, Carousel);
@@ -8,12 +9,17 @@ Vue.component(CarouselItem.name, CarouselItem);
 Vue.component(Dropdown.name, Dropdown);
 Vue.component(DropdownMenu.name, DropdownMenu);
 Vue.component(DropdownItem.name, DropdownItem);
+Vue.component(Main.name, Main);
+Vue.component(Aside.name, Aside);
+Vue.component(Container.name, Container);
+
 
 
 
 const Index = () => import(/* webpackChunkName: "index" */ './View/App.vue');
 const NotFound = () => import(/* webpackChunkName: "notfound" */ './View/notFound.vue');
 const PixivImgs = () => import(/* webpackChunkName: "pixivImgs" */ './View/pixivImage.vue');
+const Production = () => import(/* webpackChunkName: "prodution" */ './View/production.vue');
 
 
 const router = new VueRouter({
@@ -21,7 +27,8 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: NotFound },
     { path: '/index', component: Index },
-    { path: '/pixiv', component: PixivImgs }
+    { path: '/pixiv', component: PixivImgs },
+    { path: '/production/index', component: Production }
   ]
 });
 

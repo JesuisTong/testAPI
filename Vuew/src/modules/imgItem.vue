@@ -1,6 +1,6 @@
 <template>
-  <div class="item">
-    <div class="img"  v-bind:style="{ backgroundImage: `url(${item.image_urls.medium || item.image_urls.large})` }"></div>
+  <div class="item" @click="onClick">
+    <div class="img"  v-bind:style="{ backgroundImage: `url(${item.image_urls.square_medium || item.image_urls.medium})` }"></div>
     <div class="card">
       <div class="artist">{{ item.user.name || '' }}</div>
       <div class="content">{{ item.title || '' }}</div>
@@ -10,15 +10,25 @@
 
 <script>
 export default {
-  props: ['item']
+  props: ['item'],
+  methods: {
+    onClick: function () {
+      console.log('fuck');
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .item {
-  width: 33%;
-  height: 33vh;
+  width: 29%;
+  height: 30vh;
+  box-sizing: border-box;
+  margin: 0 2% 3vh;
+  border: 1px solid aqua;
+  border-radius: 1em;
   background-color: #fff;
+  overflow: hidden;
   .img {
     width: 100%;
     height: 70%;
@@ -31,7 +41,8 @@ export default {
     height: 30%;
     box-sizing: border-box;
     padding-top: 10%;
-    color: red;
+    color: #bbb;
+    text-align: center;
     .artist, .content {
       width: 100%;
       white-space: nowrap;

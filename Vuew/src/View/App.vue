@@ -1,54 +1,54 @@
 <template>
   <div id="index">
     <topHeader :navList="navList" />
-    <!-- <topNavigator v-bind="navList" /> -->
     <el-carousel height="500px">
       <el-carousel-item v-for="item in imgs" :key="item">
         <img class="carous" :src="item" alt="error" />
       </el-carousel-item>
     </el-carousel>
+    <Footer />
   </div>
 </template>
 
 <script>
 import topHeader from '../modules/header';
 import topNavigator from '../modules/topNav';
+import Footer from '../modules/footer';
 
 export default {
   name: 'app',
   components: {
     topHeader,
-    topNavigator
+    topNavigator,
+    Footer
   },
-  created: function () {
-    console.log(this.data);
-    // $.ajax({
-    //   url: '//47.91.209.93:3001/api/rank/day',
-    // }).done(res => {
-    //   if (!res.next_url) return;
-    //   console.log(this.data);
-    // });
-  },
+  // created: function () {
+  //   console.log(this.data);
+  // },
   data: function () {
     return {
-      imgs: ['../assets/Desktop/img1.jpg', '../assets/Desktop/img2.jpg'],
+      imgs: ['../assets/company/IMG_4505.JPG', '../assets/company/IMG_4507.JPG', '../assets/company/IMG_4510.JPG', '../assets/company/IMG_4511.JPG'],
       navList: [
         {
           text: '运营管理',
           url: '/manage',
           children: [
             {
-              text: '',
-              url: ''
+              text: '质量管理',
+              url: '/manage/qualControl'
             },
             {
-              text: '',
-              url: ''
+              text: '生产管理',
+              url: '/manage/prodManagement'
             },
             {
-              text: '',
-              url: ''
+              text: '环境管理',
+              url: '/manage/envManage'
             },
+            {
+              text: '合作交流',
+              url: '/manage/coorperation'
+            }
           ]
         },
         {
@@ -56,51 +56,33 @@ export default {
           url: '/production',
           children: [
             {
-              text: '',
+              text: '产品①',
               url: ''
             },
             {
-              text: '',
+              text: '产品二',
               url: ''
             },
             {
-              text: '',
+              text: '产品开发',
               url: ''
             },
           ]
         },
         {
           text: '企业动态',
-          url: '/nouvelle',
+          url: '/develop',
           children: [
             {
-              text: '',
+              text: '企业发展',
               url: ''
             },
             {
-              text: '',
+              text: '企业文化',
               url: ''
             },
             {
-              text: '',
-              url: ''
-            },
-          ]
-        },
-        {
-          text: '人才招聘',
-          url: '/recruiter',
-          children: [
-            {
-              text: '',
-              url: ''
-            },
-            {
-              text: '',
-              url: ''
-            },
-            {
-              text: '',
+              text: '行业新闻',
               url: ''
             },
           ]
@@ -110,17 +92,9 @@ export default {
           url: '/contact',
           children: [
             {
-              text: '',
+              text: '联系方式',
               url: ''
-            },
-            {
-              text: '',
-              url: ''
-            },
-            {
-              text: '',
-              url: ''
-            },
+            }
           ]
         }
       ],

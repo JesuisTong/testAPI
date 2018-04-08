@@ -1,7 +1,9 @@
 <template>
   <div class="header">
     <router-link to="/">
-      <div class="logo" />
+      <div class="logo">
+        亚创Logo
+      </div>
     </router-link>
     <div class="nav">
       <ul class="navList">
@@ -22,16 +24,14 @@
       </ul>
     </div>
     <div class="hoverBanner">
-      <el-dropdown v-for="i in navList" v-bind:key="i.text">
+      <el-dropdown v-for="i in navList" v-bind:key="i.text" @command="handleCommand">
         <span class="el-dropdown-link dropd">
           {{ i.text }}
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>黄金糕</el-dropdown-item>
-          <el-dropdown-item>狮子头</el-dropdown-item>
-          <el-dropdown-item>螺蛳粉</el-dropdown-item>
-          <el-dropdown-item>双皮奶</el-dropdown-item>
-          <el-dropdown-item>蚵仔煎</el-dropdown-item>
+          <el-dropdown-item v-for="n in i.children" v-bind:key="n.text" :command="n.url">
+              {{ n.text }}
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <!-- <router-link v-for="i in navList" v-bind:to="i.url" v-bind:key="i.text">
@@ -48,6 +48,9 @@ export default {
   name: 'topHeader',
   props: ['navList'],
   methods: {
+    handleCommand(e) {
+      this.$router.push({ path: e });
+    },
   }
 }
 </script>
@@ -71,7 +74,16 @@ export default {
     .logo {
       height: 100%;
       width: 128px;
-      background: red;
+      color: aquamarine;
+      font-size: 22px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // background-image: url('/assets/company/title.jpg');
+      // background-size: cover;
+      // background-position: center;
+      // background-repeat: no-repeat;
     }
     .nav {
       height: 100%;
@@ -104,6 +116,27 @@ export default {
       align-items: center;
       .dropd {
         color: #23323a;
+        cursor: pointer;
+        position: relative;
+        &:before {
+          content: '';
+          height: 50%;
+          width: 1px;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+      .d-nav {
+        background: red;
+        a {
+          color: #eeeeee;
+          text-decoration: none;
+        }
       }
     }
   }

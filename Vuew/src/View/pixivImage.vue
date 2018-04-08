@@ -28,6 +28,10 @@ export default {
     imgItem
   },
   created: function () {
+    if (window.localStorage.getItem('imgs')) {
+      this.imgs = JSON.parse(window.localStorage.getItem('imgs'));
+      return;
+    }
     this.throttle = true;
     $.ajax({
       url: '//47.91.209.93:3001/api/rank/day',
@@ -38,6 +42,7 @@ export default {
     }).done(res => {
       this.page += 1;
       this.imgs = [...this.imgs, ...res.illusts];
+      window.localStorage.setItem('imgs', JSON.stringify(this.imgs));
       this.throttle = false;
     });
   },
@@ -59,7 +64,6 @@ export default {
     onScroll: function () {
       if (this.isEnd) return;
       if (this.throttle) return;
-      console.log(1);
       if (document.documentElement.scrollHeight - document.documentElement.scrollTop <= window.screen.availHeight + 100) {
         console.log(2);
         this.throttle = true;
@@ -72,11 +76,11 @@ export default {
         }).done(res => {
           this.page += 1;
           this.imgs = [...this.imgs, ...res.illusts];
+          window.localStorage.setItem('imgs', JSON.stringify(this.imgs));
           this.throttle = false;
         });
       }
     },
-
   }
 }
 </script>
@@ -84,6 +88,7 @@ export default {
 <style lang="scss" scoped>
 .pixiv {
   width: 100%;
+  padding-top: 16px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
