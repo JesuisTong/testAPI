@@ -106,7 +106,7 @@ router.get('/api/*', async (ctx) => {
 router.get('/*', async (ctx) => {
   const { response } = ctx;
   response.type = 'text/html';
-  response.body = fs.createReadStream(path.resolve(__dirname, '../Vuew/index.html'));
+  response.body = fs.createReadStream(path.resolve(__dirname, '../Vuew/dist/index.html'));
 });
 
 // 静态资源

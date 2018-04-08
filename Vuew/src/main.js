@@ -16,10 +16,10 @@ Vue.component(Container.name, Container);
 
 
 
-const Index = () => import(/* webpackChunkName: "index" */ './View/App.vue');
-const NotFound = () => import(/* webpackChunkName: "notfound" */ './View/notFound.vue');
-const PixivImgs = () => import(/* webpackChunkName: "pixivImgs" */ './View/pixivImage.vue');
-const Production = () => import(/* webpackChunkName: "prodution" */ './View/production.vue');
+const Index = () => import(/* webpackChunkName: "View/index" */ './View/App.vue');
+const NotFound = () => import(/* webpackChunkName: "View/notfound" */ './View/notFound.vue');
+const PixivImgs = () => import(/* webpackChunkName: "View/pixivImgs" */ './View/pixivImage.vue');
+const Production = () => import(/* webpackChunkName: "View/prodution" */ './View/production.vue');
 
 
 const router = new VueRouter({

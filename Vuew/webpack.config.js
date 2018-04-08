@@ -4,8 +4,11 @@ var webpack = require('webpack')
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var onBuildWebpack = require('on-build-webpack');
 var notifier = require('node-notifier');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const env = process.env.NODE_ENV;
 var config = {
+  mode: env,
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -50,6 +53,20 @@ var config = {
       }
     ]
   },
+  optimization: {
+    runtimeChunk: { name: 'manifest' },
+    splitChunks: {
+      automaticNameDelimiter: '-',
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          name: 'vendors',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        }
+      }
+    },
+  },
   node: {
     __filename: true,
     __dirname: true
@@ -66,13 +83,6 @@ var config = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "manifest",
-      minChunks: Infinity
-    }),
     new onBuildWebpack((stats) => {
       const { compilation } = stats;
       const { errors } = compilation;
@@ -89,6 +99,10 @@ var config = {
             message: `cost ${stats.endTime - stats.startTime} ms, ${warningNumber} warning(s)`
           });
       }
+    }),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      cache: true,
     })
   ],
   performance: {
@@ -96,26 +110,5 @@ var config = {
   },
   devtool: 'eval-source-map'
 }
-
-if (process.env.NODE_ENV === 'production') {
-  config.devtool = 'inline-source-map';
-  config.plugins = (config.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
-}
-
 
 module.exports = config;
