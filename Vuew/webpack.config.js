@@ -5,11 +5,14 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 var onBuildWebpack = require('on-build-webpack');
 var notifier = require('node-notifier');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const env = process.env.NODE_ENV;
 var config = {
   mode: env,
-  entry: './src/main.js',
+  entry: {
+    main: './src/main.js',
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -54,6 +57,8 @@ var config = {
     ]
   },
   optimization: {
+    namedChunks: true,
+    namedModules: true,
     runtimeChunk: { name: 'manifest' },
     splitChunks: {
       automaticNameDelimiter: '-',
@@ -73,7 +78,6 @@ var config = {
   },
   resolve: {
     alias: {
-      'vue': 'vue/dist/vue.esm.js',
       'modules': '/src/modules'
     },
     extensions: ['*', '.js', '.vue', '.json']
@@ -103,8 +107,9 @@ var config = {
     new HtmlWebpackPlugin({
       template: './index.html',
       cache: true,
-    })
-  ],
+    }),
+    process.env.isAnalyze && new BundleAnalyzerPlugin(),
+  ].filter(i => i),
   performance: {
     hints: false
   },

@@ -25,7 +25,7 @@ const Production = () => import(/* webpackChunkName: "View/prodution" */ './View
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: NotFound },
+    { path: '/*', component: NotFound },
     { path: '/index', component: Index },
     { path: '/pixiv', component: PixivImgs },
     { path: '/production/index', component: Production }
@@ -36,10 +36,17 @@ const router = new VueRouter({
 
 new Vue({
   router,
-  template: `
-    <div id="app">
-      <!-- <h1>Basic</h1> -->  
-      <router-view class="view"></router-view>
-    </div>
-  `
+  render(creatElement) {
+    return creatElement(
+      'div',
+      {
+        class: {
+          root: true
+        }
+      },
+      [
+        creatElement('router-view')
+      ]
+    );
+  }
 }).$mount('#app')

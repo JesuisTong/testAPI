@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+// const zlib = require('zlib');
 const Koa = require('koa');
 const Router = require('koa-router');
 const serve = require('koa-static');
+const compress = require('koa-compress');
 const PixivAPI = require('../build/PixivAPI');
 
 const App = new Koa();
@@ -108,6 +110,9 @@ router.get('/*', async (ctx) => {
   response.type = 'text/html';
   response.body = fs.createReadStream(path.resolve(__dirname, '../Vuew/dist/index.html'));
 });
+
+// gzip 压缩处理
+App.use(compress());
 
 // 静态资源
 App.use(serve(path.resolve(__dirname, '../Vuew')));

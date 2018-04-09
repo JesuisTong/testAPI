@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "start": "cross-env NODE_ENV=development webpack --progress --watch",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "analyz": "cross-env isAnalyze=1 NODE_ENV=development webpack --progress --watch"
   },
   "dependencies": {
     "element-ui": "^2.2.0",
@@ -47,6 +48,7 @@
     "vue-style-loader": "^4.0.2",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^4.5.0",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.14",
     "webpack-dev-server": "^2.9.1"
   }
