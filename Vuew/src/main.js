@@ -25,10 +25,10 @@ const Production = () => import(/* webpackChunkName: "View/prodution" */ './View
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/*', component: NotFound },
     { path: '/index', component: Index },
     { path: '/pixiv', component: PixivImgs },
-    { path: '/production/index', component: Production }
+    { path: '/production/index', component: Production },
+    { path: '/*', component: NotFound },
   ]
 });
 
