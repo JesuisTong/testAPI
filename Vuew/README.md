@@ -13,6 +13,13 @@ npm run dev
 
 # build for production with minification
 npm run build
+
+# build analyse to watch bundle content
+npm run analyz
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## To do
+
+1. 引入 vue-class-component (原因还是更喜欢react的class编写方式)
+2. 引入typescript
+
