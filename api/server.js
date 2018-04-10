@@ -90,6 +90,24 @@ router.get('/api/rank/:mode', async (ctx, next) => {
   }
 });
 
+// get作品详情
+router.get('/api/illustDetail', async (ctx, next) => {
+  console.log('--------illust detail-------');
+  const { response } = ctx;
+  try {
+    await Pixiv.illustDetail(ctx.query.uri || '', (res) => {
+      response.type = 'application/json';
+      response.body = res;
+    });
+  } catch (err) {
+    ctx.status = err.statusCode || err.status || 500;
+    ctx.body = {
+      code: 400,
+      msg: err.message
+    };
+  }
+});
+
 router.get('/api/*', async (ctx) => {
   console.log('-----empty----');
   const {request, response} = ctx;

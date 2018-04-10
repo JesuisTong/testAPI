@@ -11,7 +11,7 @@ class PixivAPI extends PixivBase {
   }
   // 组成头部
   componseHeader = () => ({ ...PixivAPI._noAuthHeaders, ...PixivAPI._headers })
-  // ユーザーの詳細
+  // ユーザーの詳細 用户详细信息
   userDetail = (userId, cb) => (
     this.fetch('/v1/user/detail', {
       method: 'get',
@@ -22,7 +22,7 @@ class PixivAPI extends PixivBase {
       },
     }, cb)
   )
-  // ユーザーのイラスト
+  // ユーザーのイラスト 作者作品
   userIllusts = (options = { userId: '', page: 1, type: 'illust' }, cb) => (
     this.fetch('/v1/user/illust', {
       method: 'get',
@@ -35,7 +35,7 @@ class PixivAPI extends PixivBase {
       }
     }, cb)
   )
-  // 検索イラスト
+  // 検索イラスト 检索作品
   searchIllust = (options = { word: '', page: 1, search_target: 'partial_match_for_tags', sort: 'date_desc', duration: null }, cb) => {
     const body = {
       word: options.word,
@@ -53,7 +53,7 @@ class PixivAPI extends PixivBase {
       body: body
     }, cb);
   }
-  // ユーザーのマーク付きイラスト
+  // ユーザーのマーク付きイラスト 书签作品
   userBookmarksIllust = (options = { user_id: '', restrict: 'public' }, cb) => (
     this.fetch('/v1/user/bookmarks/illust', {
       method: 'get',
@@ -61,7 +61,7 @@ class PixivAPI extends PixivBase {
       body: { ...options, filter: PixivAPI._apiFilter }
     }, cb)
   )
-  // イラストの詳細
+  // イラストの詳細 作品详情
   illustDetail = (illust_id, cb) => (
     this.fetch('/v1/illust/detail', {
       method: 'get',
@@ -69,7 +69,7 @@ class PixivAPI extends PixivBase {
       body: { illust_id }
     }, cb)
   )
-  // イラストのコメント
+  // イラストのコメント 作品留言
   illustComments = (options = { illust_id: '', page: 1, include_total_comments: true }, cb) => (
     this.fetch('/v1/illust/comments', {
       method: 'get',
@@ -81,11 +81,22 @@ class PixivAPI extends PixivBase {
       }
     }, cb)
   )
-  // 関連イラストリスト
-  illustRelated = () => {
-
+  // 関連イラストリスト 相关作品
+  illustRelated = (options = { illust_id: '', seed_illust_ids: '' }, cb) => {
+    const body = {
+      illust_id: options.illust_id,
+      filter: PixivAPI._apiFilter,
+    };
+    if (options.seed_illust_ids) {
+      body.seed_illust_ids = options.seed_illust_ids;
+    }
+    this.fetch('/v2/illust/related', {
+      method: 'get',
+      headers: this.headers,
+      body
+    }, cb)
   }
-  // ランキングイラスト一覧
+  // ランキングイラスト一覧 作品一览
   illustRanking = (options = { mode: 'day', page: 1, date: null }, cb) => {
     const body = {
       mode: options.mode,
