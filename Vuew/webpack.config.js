@@ -78,7 +78,7 @@ var config = {
   },
   resolve: {
     alias: {
-      'modules': '/src/modules'
+      modules: path.resolve(__dirname, 'src/modules')
     },
     extensions: ['*', '.js', '.vue', '.json']
   },

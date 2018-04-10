@@ -10,7 +10,10 @@
     </el-aside>
     <el-main>
       <div class="container">
-        <img src="../assets/Desktop/img1.jpg" alt="error" />
+        <div class="img" />
+        <div class="content">
+          {{ xxxx }}
+        </div>
       </div>
     </el-main>
   </el-container>

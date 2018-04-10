@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Footer from '../modules/footer';
+import Footer from 'modules/footer';
 
 export default {
   name: 'app',

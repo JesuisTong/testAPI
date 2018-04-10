@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" :style="{ display: showHide ? 'block' : 'none' }">
     <router-link to="/">
       <div class="logo">
         亚创Logo
@@ -47,10 +47,22 @@
 export default {
   name: 'topHeader',
   props: ['navList'],
+  data: function () {
+    return {
+      showHide: false
+    };
+  },
+  created() {
+    // 暴露在window下控制header显示
+    window.handleHeader = this.handleHeader;
+  },
   methods: {
     handleCommand(e) {
       this.$router.push({ path: e });
     },
+    handleHeader() {
+      this.showHide = !this.showHide;
+    }
   }
 }
 </script>

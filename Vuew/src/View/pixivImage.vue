@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import imgItem from "../modules/imgItem";
+import imgItem from "modules/imgItem";
 
 const getSearchQuery = (str = '') => {
   if (!str) str = location.href;
@@ -65,7 +65,6 @@ export default {
       if (this.isEnd) return;
       if (this.throttle) return;
       if (document.documentElement.scrollHeight - document.documentElement.scrollTop <= window.screen.availHeight + 100) {
-        console.log(2);
         this.throttle = true;
         this.page && $.ajax({
           url: '//47.91.209.93:3001/api/rank/day',

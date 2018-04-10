@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 import { Main, Aside, Container, Carousel, CarouselItem, Dropdown, DropdownMenu, DropdownItem } from 'element-ui';
-import Header from './modules/header';
+import Header from 'modules/header';
 import './global/main.scss';
 
 Vue.use(VueRouter);
@@ -13,7 +13,6 @@ Vue.component(DropdownItem.name, DropdownItem);
 Vue.component(Main.name, Main);
 Vue.component(Aside.name, Aside);
 Vue.component(Container.name, Container);
-
 
 
 
@@ -115,14 +114,6 @@ const navList = [
 
 new Vue({
   router,
-  data: {
-    showHeader: false
-  },
-  methods: {
-    handleHeader() {
-      this.showHeader = !this.showHeader;
-    }
-  },
   render(creatElement) {
     return creatElement(
       'div',
@@ -132,7 +123,7 @@ new Vue({
         }
       },
       [
-        this.showHeader && creatElement(Header, {
+        creatElement(Header, {
           props: { navList }
         }),
         creatElement('router-view')

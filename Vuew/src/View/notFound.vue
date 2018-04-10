@@ -10,12 +10,8 @@
 
 <script>
 export default {
-  created: function () {
-    console.log(this.$router);
-  },
   computed: {
     username () {
-      // 我们很快就会看到 `params` 是什么
       return this.$route.params.username
     }
   },
