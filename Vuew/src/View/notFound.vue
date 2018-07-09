@@ -3,6 +3,7 @@
     Darling in the FranXX
     <p>Image for xx</p>
     <img class='ima' src='../assets/015.jpg' alt='error'>
+    <a href="../assets/9941862.rar" download="ddd.rar">千岛群岛</a>
     <router-link to="/index">Index</router-link>
   </div>
 </template>
